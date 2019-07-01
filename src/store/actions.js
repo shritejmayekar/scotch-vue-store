@@ -19,32 +19,33 @@ import {
 export const productActions = {
   allProducts ({commit}) {
     commit(ALL_PRODUCTS)
-    axios.get(`${API_BASE}/products`).then(response => {
-      commit(ALL_PRODUCTS_SUCCESS, response.data)
+    axios.get(`${API_BASE}/product`).then(response => {
+      console.log(response.data['results'])
+      commit(ALL_PRODUCTS_SUCCESS, response.data['results'])
     })
   },
   productById ({commit}, payload) {
     commit(PRODUCT_BY_ID)
-    axios.get(`${API_BASE}/products/${payload}`).then(response => {
+    axios.get(`${API_BASE}/product/${payload}`).then(response => {
       console.log(payload, response.data)
       commit(PRODUCT_BY_ID_SUCCESS, response.data)
     })
   },
   addProduct ({commit}, payload) {
     commit(ADD_PRODUCT)
-    axios.post(`${API_BASE}/products`, payload).then(response => {
+    axios.post(`${API_BASE}/product`, payload).then(response => {
       commit(ADD_PRODUCT_SUCCESS, response.data)
     })
   },
   updateProduct ({commit}, payload) {
     commit(UPDATE_PRODUCT)
-    axios.put(`${API_BASE}/products/${payload._id}`, payload).then(response => {
+    axios.put(`${API_BASE}/product/${payload._id}`, payload).then(response => {
       commit(UPDATE_PRODUCT_SUCCESS, response.data)
     })
   },
   removeProduct ({commit}, payload) {
     commit(REMOVE_PRODUCT)
-    axios.delete(`${API_BASE}/products/${payload}`, payload).then(response => {
+    axios.delete(`${API_BASE}/product/${payload}`, payload).then(response => {
       console.debug('response', response.data)
       commit(REMOVE_PRODUCT_SUCCESS, response.data)
     })
